@@ -32,7 +32,7 @@ public class DoubleLinkedList {
     private void addBetween(Score s, Node predecessor, Node successor) {
         Node newest = new Node (s, predecessor, successor);
         predecessor.setNext(newest);
-        successor.setPrevious(predecessor);
+        successor.setPrevious(newest);
         size++;
     }
 
@@ -65,13 +65,13 @@ public class DoubleLinkedList {
                         }
                     }
                     else {
-                        addBetween(s, current.getPrevious(), current.getNext());
+                        addBetween(s, current, current.getNext());
                         if (size() > 10) removeLast();
                     }
                 }
             }
             else {
-                Node current = trailer.getNext();
+                Node current = trailer.getPrevious();
                 if (current.getScore().getScore() >= s.getScore()) {
                     if (size() < 10) addLast(s);
                 }
@@ -84,7 +84,7 @@ public class DoubleLinkedList {
                         if (size() > 10) removeLast();
                     }
                     else {
-                        addBetween(s, current.getPrevious(), current.getNext());
+                        addBetween(s, current.getPrevious(), current);
                         if (size() > 10) removeLast();
                     }
                 }
@@ -93,21 +93,21 @@ public class DoubleLinkedList {
     }
 
     public void printLinkedList(){
-        Node current = list;
+        Node current = header.getNext();
         int count = 1;
-        while (current != null){
+        while (current != trailer){
             System.out.println(count + ": " + current.data.getScore());
             current = current.next;
             count++;
         }
     }
 
-    private class Node{
+    private class Node {
 
-        public Score data;
+        private Score data;
         private Node next, previous;
 
-        public Node(Score s, Node next, Node previous){
+        public Node(Score s, Node previous, Node next) {
             data = s;
             this.next = next;
             this.previous = previous;
