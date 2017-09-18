@@ -1,11 +1,43 @@
 public class DoubleLinkedList {
 
-    private Node list;
+    private Node header, trailer;
+    private int size = 0;
 
     public DoubleLinkedList() {
-        list = null;
+        header = new Node(null, null, null);
+        trailer = new Node(null, header, null);
+        header.setNext(trailer);
     }
 
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public Score first() {
+        if (isEmpty()) return null;
+        return header.getNext().getScore();
+    }
+
+    public Score last() {
+        if (isEmpty()) return null;
+        return trailer.getPrevious().getScore();
+    }
+
+    public void removeLast() {
+        if (!isEmpty()) remove(trailer.getPrevious());
+    }
+
+    private void remove(Node node) {
+        Node predecessor = node.getPrevious();
+        Node successor = node.getNext();
+        predecessor.setNext(successor);
+        successor.setPrevious(predecessor);
+        size--;
+    }
     public void addNode(Score s) {
         Node newNode = new Node(s);
         Node current = list;
@@ -88,11 +120,32 @@ public class DoubleLinkedList {
     private class Node{
 
         public Score data;
-        private Node next;
+        private Node next, previous;
 
-        public Node(Score s){
+        public Node(Node next, Node previous, Score s){
             data = s;
-            next = null;
+            this.next = next;
+            this.previous = previous;
+        }
+
+        public Score getScore() {
+            return data;
+        }
+
+        public Node getPrevious() {
+            return previous;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setPrevious(Node previous) {
+            this.previous = previous;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
         }
     }
 }
