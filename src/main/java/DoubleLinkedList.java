@@ -47,46 +47,45 @@ public class DoubleLinkedList {
     public void addNode(Score s) {
         if (isEmpty()) {
             addFirst(s);
+            return;
+        }
+        if (s.getScore() > 50) {
+            Node current = header.getNext();
+            if (current.getScore().getScore() <= s.getScore()) {
+                addFirst(s);
+                if (size() > 10) removeLast();
+            }
+            else {
+                while (current.getNext() != trailer && s.getScore() <= current.getNext().getScore().getScore()) {
+                    current = current.getNext();
+                }
+                if (current.getNext() == trailer) {
+                    if (size() < 10) {
+                        addLast(s);
+                    }
+                }
+                else {
+                    addBetween(s, current, current.getNext());
+                    if (size() > 10) removeLast();
+                }
+            }
         }
         else {
-            if (s.getScore() > 50) {
-                Node current = header.getNext();
-                if (current.getScore().getScore() <= s.getScore()) {
+            Node current = trailer.getPrevious();
+            if (current.getScore().getScore() >= s.getScore()) {
+                if (size() < 10) addLast(s);
+            }
+            else {
+                while (current.getPrevious() != header && s.getScore() >= current.getPrevious().getScore().getScore()) {
+                    current = current.getPrevious();
+                }
+                if (current.getPrevious() == header) {
                     addFirst(s);
                     if (size() > 10) removeLast();
                 }
                 else {
-                    while (current.getNext() != trailer && s.getScore() <= current.getNext().getScore().getScore()) {
-                        current = current.getNext();
-                    }
-                    if (current.getNext() == trailer) {
-                        if (size() < 10) {
-                            addLast(s);
-                        }
-                    }
-                    else {
-                        addBetween(s, current, current.getNext());
-                        if (size() > 10) removeLast();
-                    }
-                }
-            }
-            else {
-                Node current = trailer.getPrevious();
-                if (current.getScore().getScore() >= s.getScore()) {
-                    if (size() < 10) addLast(s);
-                }
-                else {
-                    while (current.getPrevious() != header && s.getScore() >= current.getPrevious().getScore().getScore()) {
-                        current = current.getPrevious();
-                    }
-                    if (current.getPrevious() == header) {
-                        addFirst(s);
-                        if (size() > 10) removeLast();
-                    }
-                    else {
-                        addBetween(s, current.getPrevious(), current);
-                        if (size() > 10) removeLast();
-                    }
+                    addBetween(s, current.getPrevious(), current);
+                    if (size() > 10) removeLast();
                 }
             }
         }
