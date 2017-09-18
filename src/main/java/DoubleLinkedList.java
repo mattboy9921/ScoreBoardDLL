@@ -38,33 +38,65 @@ public class DoubleLinkedList {
         successor.setPrevious(predecessor);
         size--;
     }
+
+    private void addBetween(Score s, Node predecessor, Node successor) {
+        Node newest = new Node (s, predecessor, successor);
+        predecessor.setNext(newest);
+        successor.setPrevious(predecessor);
+        size++;
+    }
+
+    public void addFirst(Score s) {
+        addBetween(s, header, header.getNext());
+    }
+
+    public void addLast(Score s) {
+        addBetween(s, trailer.getPrevious(), trailer);
+    }
+
     public void addNode(Score s) {
-        Node newNode = new Node(s);
-        Node current = list;
-        if (list == null){
-            list = newNode;
-        }
-        else if (newNode.data.getScore() >= current.data.getScore()){
-            list = newNode;
-            newNode.next = current;
-            if (countNodes(list) > 10) {
-                removeLastNode();
-            }
+        if (isEmpty()) {
+            addFirst(s);
         }
         else {
-            while (current.next != null && newNode.data.getScore() <= current.next.data.getScore()){
-                current = current.next;
-            }
-            if (current.next == null) {
-                if (countNodes(list) < 10) {
-                    current.next = newNode;
+            if (s.getScore() > 50) {
+                Node current = header.getNext();
+                if (current.getScore().getScore() <= s.getScore()) {
+                    addFirst(s);
+                    if (size() > 10) removeLast();
+                }
+                else {
+                    while (current.getNext() != trailer && s.getScore() <= current.getNext().getScore().getScore()) {
+                        current = current.getNext();
+                    }
+                    if (current.getNext() == trailer) {
+                        if (size() < 10) {
+                            addLast(s);
+                        }
+                    }
+                    else {
+                        addBetween(s, current.getPrevious(), current.getNext());
+                        if (size() > 10) removeLast();
+                    }
                 }
             }
             else {
-                newNode.next = current.next;
-                current.next = newNode;
-                if (countNodes(list) > 10) {
-                    removeLastNode();
+                Node current = trailer.getNext();
+                if (current.getScore().getScore() >= s.getScore()) {
+                    if (size() < 10) addLast(s);
+                }
+                else {
+                    while (current.getPrevious() != header && s.getScore() >= current.getPrevious().getScore().getScore()) {
+                        current = current.getPrevious();
+                    }
+                    if (current.getPrevious() == header) {
+                        addFirst(s);
+                        if (size() > 10) removeLast();
+                    }
+                    else {
+                        addBetween(s, current.getPrevious(), current.getNext());
+                        if (size() > 10) removeLast();
+                    }
                 }
             }
         }
@@ -122,7 +154,7 @@ public class DoubleLinkedList {
         public Score data;
         private Node next, previous;
 
-        public Node(Node next, Node previous, Score s){
+        public Node(Score s, Node next, Node previous){
             data = s;
             this.next = next;
             this.previous = previous;
