@@ -17,16 +17,6 @@ public class DoubleLinkedList {
         return size == 0;
     }
 
-    public Score first() {
-        if (isEmpty()) return null;
-        return header.getNext().getScore();
-    }
-
-    public Score last() {
-        if (isEmpty()) return null;
-        return trailer.getPrevious().getScore();
-    }
-
     public void removeLast() {
         if (!isEmpty()) remove(trailer.getPrevious());
     }
@@ -99,24 +89,6 @@ public class DoubleLinkedList {
                     }
                 }
             }
-        }
-    }
-
-    public void printLinkedList(){
-        Node current = list;
-        int count = 1;
-        while (current != null){
-            System.out.println(count + ": " + current.data.getScore());
-            current = current.next;
-            count++;
-        }
-    }
-
-    public int countNodes(Node list){
-        if (list.next == null) {
-            return 1;
-        }else{
-            return countNodes(list.next) + 1;
         }
     }
 
