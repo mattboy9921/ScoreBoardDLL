@@ -92,6 +92,16 @@ public class DoubleLinkedList {
         }
     }
 
+    public void printLinkedList(){
+        Node current = list;
+        int count = 1;
+        while (current != null){
+            System.out.println(count + ": " + current.data.getScore());
+            current = current.next;
+            count++;
+        }
+    }
+
     private class Node{
 
         public Score data;
