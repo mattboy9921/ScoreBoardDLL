@@ -6,38 +6,38 @@ Perform the previous project, but use a doubly linked list. Moreover, your imple
 Program Output:
 
 Here is a list of 20 scores:
-Score 1: 89
-Score 2: 96
-Score 3: 97
-Score 4: 50
-Score 5: 11
-Score 6: 50
-Score 7: 96
-Score 8: 37
-Score 9: 97
-Score 10: 84
-Score 11: 67
-Score 12: 52
-Score 13: 82
-Score 14: 97
-Score 15: 41
-Score 16: 58
-Score 17: 85
-Score 18: 78
-Score 19: 58
-Score 20: 100
+Score 1: 11
+Score 2: 2
+Score 3: 48
+Score 4: 5
+Score 5: 40
+Score 6: 70
+Score 7: 47
+Score 8: 8
+Score 9: 24
+Score 10: 98
+Score 11: 25
+Score 12: 24
+Score 13: 53
+Score 14: 34
+Score 15: 7
+Score 16: 59
+Score 17: 11
+Score 18: 24
+Score 19: 62
+Score 20: 92
 
 The top 10 scores are:
-1: 100
-2: 97
-3: 97
-4: 97
-5: 96
-6: 96
-7: 89
-8: 85
-9: 84
-10: 82
+1: 98
+2: 92
+3: 70
+4: 62
+5: 59
+6: 53
+7: 48
+8: 47
+9: 40
+10: 34
 
 Process finished with exit code 0
 
