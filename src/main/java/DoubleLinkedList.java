@@ -102,35 +102,6 @@ public class DoubleLinkedList {
         }
     }
 
-    public int averageScores() {
-        Node current = list;
-        int total = 0, count = 0;
-        if (list == null) {
-            return -1;
-        }
-        else if (current.next == null) {
-            return current.data.getScore();
-        }
-        else {
-            while (current != null) {
-                total += current.data.getScore();
-                count++;
-                current = current.next;
-            }
-            return total / count;
-        }
-    }
-
-    public void removeLastNode() {
-        Node current = list;
-        Node previous = list;
-        while (current.next != null) {
-            previous = current;
-            current = current.next;
-        }
-        previous.next = null;
-    }
-
     public void printLinkedList(){
         Node current = list;
         int count = 1;
